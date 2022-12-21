@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% load filters %}
+{% block title %}
+    Formulario en DJango
+{% endblock %}
+
+{% block content %}
+    <h1 class="title">Formularios en DJango</h1> 
+    {% if form.errors %}
+        <strong class="rojo">    
+            Hay errores en el Formulario
+            {{form.errors}}
+        </strong>    
+    {% endif %}
+    <form action="{% url 'save_articulo' %}" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Agregar" />
+    </form>
+  
+{% endblock %}

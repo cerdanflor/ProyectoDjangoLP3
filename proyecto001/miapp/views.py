@@ -1,5 +1,9 @@
 from django.shortcuts import render, HttpResponse, redirect
 from miapp.models import Articulo
+from django.db.models import Q
+from miapp.forms import FormArticulo
+from django.contrib import messages
+
 
 # Create your views here.
 
@@ -128,13 +132,42 @@ def save_articulo(request):
             publicado = publicado
         )
         articulo.save()
-        return HttpResponse(f"Articulo Creado: {articulo.titulo} - {articulo.contenido}")
+        # Crear un mensaje flash (Sesión que solo se muestra 1 vez)
+        messages.success(request, f'Se agregó correctamente el artículo {articulo.id}')
+        return redirect('listar_articulos')
     else:
         return HttpResponse("<h2>No se ha podido registrar el artículo</h2>")
 
 def create_articulo(request):
     return render(request, 'create_articulo.html')
 
+def create_full_articulo(request):
+    if request.method == 'POST':
+        formulario = FormArticulo(request.POST)
+        if formulario.is_valid():
+            data_form = formulario.cleaned_data
+            # Hay 2 formas de recuperar la información
+            titulo  = data_form.get('titulo')
+            contenido = data_form['contenido']
+            publicado = data_form['publicado']
+            articulo = Articulo(
+                titulo = titulo,
+                contenido = contenido,
+                publicado = publicado
+            )
+            articulo.save()
+            # Crear un mensaje flash (Sesión que solo se muestra 1 vez)
+            messages.success(request, f'Se agregó correctamente el artículo {articulo.id}')
+            return redirect('listar_articulos')
+            #return HttpResponse(articulo.titulo + ' -  ' + articulo.contenido + ' - ' + str(articulo.publicado))
+
+    else:
+        formulario = FormArticulo()
+        # Generamos un formulario vacío
+
+    return render(request, 'create_full_articulo.html',{
+        'form': formulario
+    })
 
 
 
