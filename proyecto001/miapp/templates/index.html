@@ -1,10 +1,40 @@
 {% extends 'layout.html' %}
 
 {% block title %}
-    Inicio
+    {{titulo}}
 {% endblock title %}
 
 {% block content %}
-    <h1 class="title">Página Index</h1>
-    <h2>Usango templates</h2>
+<!--Comentario en HTML-->
+
+{% comment "Datos de la pagina index.html" %}
+    En esta pagina se mostrara la bienvenida al sistema.....
+{% endcomment %}
+    <h1 class="title">Página {{titulo}}</h1>
+    <p>Usango templates</p>
+    {% if mensaje %}
+        <p> Mensaje: {{mensaje}} </p>
+    {% else %}
+        <strong>El Mensaje no tiene contenido</strong>
+    {% endif %}
+    <p> 
+        <strong> Estudiantes Registrados (Método 01: Imprime lista): </strong> 
+    </p>
+    {{estudiantes}}
+    
+    <p> 
+        <strong> Estudiantes Registrados (Método 02: Imprime lista utilizando for): </strong> 
+    </p>
+    <ul>
+        {% for estudiante in estudiantes %}
+            <li>
+                {{forloop.counter}}.{{estudiante}}
+            </li>
+        {% empty%}
+            <p>
+                No hay estudiantes registrados
+            </p>
+        {% endfor %}
+    </ul>
+    <p>Año: 2022</p>
 {% endblock %}
