@@ -13,28 +13,40 @@
     </head>
     </head>
     <body>
-        <h1> Proyecto Web (LP3) | Flor Cerdán </h1>
-        <hr/>
-        <ul>
-            <li>
-                <a href="/inicio"> Inicio</a>
-            </li>
-            <li>
-                <a href="/saludo"> Mensaje de Saludo</a>
-            </li>
-            <li>
-                <a href="/rango"> Mostrar Números [a,b]</a>
-            </li>
-            <li>
-                <a href="/rango2/10/15"> Mostrar Números [10,15]</a>
-            </li>
-        </ul>
-        <hr/>
- 
+        <header>
+            <div id="logotipo">
+                <img src="{% static 'images/LogoDJango.png' %}" />
+                <h1>Proyecto Web (LP3)</h1>
+            </div>
+        </header>
+        <nav>        
+            <ul>
+                <li>
+                    <a href="/inicio"> Inicio</a>
+                </li>
+                <li>
+                    <a href="/saludo"> Mensaje de Saludo</a>
+                </li>
+                <li>
+                    <a href="/rango"> Mostrar Números [a,b]</a>
+                </li>
+                <li>
+                    <a href="/rango2/10/15"> Mostrar Números [10,15]</a>
+                </li>
+            </ul>
+        </nav>        
+        <div class="barra">
+            <span class="esquina-izquierda"></span>
+            <span class="relleno-barra"></span>
+            <span class="esquina-derecha"></span>
+        </div>
         <div id="content">
-            {% block content %}
-                <strong> Contenido en layout </strong>
-            {% endblock %}
+            <div class="box">
+                
+                {% block content %}
+                    <strong> Contenido en layout </strong>
+                {% endblock %}
+            </div>
         </div>
         <footer>
             UNTELS - Lenguaje de Programación III &copy; Flor Cerdán
