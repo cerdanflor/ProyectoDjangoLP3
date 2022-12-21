@@ -5,7 +5,10 @@
 
 {% block content %}    
     <h1 class="title">Bienvenidos</h1>
-    <h2>{{autor_saludo}}</h2>
-    <h3>Python....</h3>
-    {{ block.super }}
+    {{autor_saludo}}
+    {% load filters %}
+    {{"Iniciando curso de LP3 en la UNTELS"|saludo|safe}}
+    <p>
+        {{ block.super }}
+    </p>
 {% endblock %}

@@ -17,24 +17,7 @@
     {% else %}
         <strong>El Mensaje no tiene contenido</strong>
     {% endif %}
-    <p> 
-        <strong> Estudiantes Registrados (Método 01: Imprime lista): </strong> 
-    </p>
-    {{estudiantes}}
-    
-    <p> 
-        <strong> Estudiantes Registrados (Método 02: Imprime lista utilizando for): </strong> 
-    </p>
-    <ul>
-        {% for estudiante in estudiantes %}
-            <li>
-                {{forloop.counter}}.{{estudiante}}
-            </li>
-        {% empty%}
-            <p>
-                No hay estudiantes registrados
-            </p>
-        {% endfor %}
-    </ul>
+    {% include 'listado_estudiantesregistrados.html' with encabezado="Estudiantes Registrados" %}
     <p>Año: 2022</p>
+    {% include 'filtros.html' with encabezado="Universidad Nacional Tecnologica de Lima Sur" %}
 {% endblock %}
