@@ -1,3 +1,11 @@
-<h1>Bienvenidos al Curso</h1>
-<h2> Mg. Flor Elizabeth Cerdán León</h2>
-<h3>Python</h3>
+{% extends 'layout.html' %}
+{% block title %}
+    Saludo
+{% endblock title %}
+
+{% block content %}
+    {{ block.super }}
+    <h1>Bienvenidos</h1>
+    <h2>Flor Cerdán</h2>
+    <h3>Python....</h3>
+{% endblock %}
