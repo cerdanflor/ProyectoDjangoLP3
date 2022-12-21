@@ -102,12 +102,7 @@ def editar_articulo(request, id):
     return HttpResponse(f"Articulo Editado: {articulo.titulo} - {articulo.contenido}")
 
 def listar_articulos(request):
-    articulos = Articulo.objects.raw("""
-                        SELECT *
-                        FROM MIAPP_ARTICULO
-                        WHERE
-                            ID >=7;
-                    """)
+    articulos = Articulo.objects.all()
     return render(request, 'listar_articulos.html',{
            'articulos':articulos,
             'titulo': 'Listado de Artículos'
@@ -119,6 +114,26 @@ def eliminar_articulo(request, id):
     articulo.delete()
     return redirect('listar_articulos')
 
+def save_articulo(request):
+    if request.method == 'POST':
+        titulo = request.POST['titulo']
+        if len(titulo)<=5:
+            return HttpResponse("<h2>El tamaño del título es pequeño, intente nuevamente</h2>")
+        contenido = request.POST['contenido']
+        publicado = request.POST['publicado']
+ 
+        articulo = Articulo(
+            titulo = titulo,
+            contenido = contenido,
+            publicado = publicado
+        )
+        articulo.save()
+        return HttpResponse(f"Articulo Creado: {articulo.titulo} - {articulo.contenido}")
+    else:
+        return HttpResponse("<h2>No se ha podido registrar el artículo</h2>")
+
+def create_articulo(request):
+    return render(request, 'create_articulo.html')
 
 
 
